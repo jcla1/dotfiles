@@ -111,7 +111,7 @@ fi
 ###### Git Stuff #######
 
 
-. git-completion
+. /data/dev/dotfiles/git-completion
 
 GIT_PS1_SHOWDIRTYSTATE=1
 
