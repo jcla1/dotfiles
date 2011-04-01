@@ -1,0 +1,12 @@
+[user]
+	name = Joseph Adams
+	email = whitegolem@gmail.com
+[core]
+	editor = vim
+[alias]
+  st = status
+  ls = ls-files
+  br = branch
+  co = checkout
+  df = diff
+  ca = commit -am
