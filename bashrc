@@ -136,7 +136,7 @@ alias chrome='/opt/google/chrome/google-chrome &'
 alias pypp='python2.6 -c "import sys, json; data = sys.stdin.read(); print json.dumps(json.loads(data), sort_keys=True, indent=4);"'
 alias eclipse='/data/software/eclipse/eclipse &'
 alias webAppCreator='/data/software/google-web-toolkit/webAppCreator'
-alias r='. ~/bashrc'
+alias r='. ~/.bashrc'
 
 export AP_PORT=9999
 ############################################
