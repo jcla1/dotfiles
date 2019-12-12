@@ -25,7 +25,7 @@ set wildmenu
 " Stop the beeping.
 set visualbell
 
-" Fold sections enclosed in {{{ ... }}}. The folds can be toggled with: za<cr>.
+" Fold sections enclosed in {{{ ... }}}. The folds can be toggled with: za.
 " Also foldcolumn enables to toggle folds using the mouse.
 set foldmethod=marker
 set foldcolumn=1
@@ -77,7 +77,9 @@ set hidden
 
 syntax enable
 filetype plugin indent on
-set background=dark
+set background=dark termguicolors
+let ayucolor='mirage'
+colorscheme ayu
 
 " Remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -98,7 +100,7 @@ vnoremap H ^
 vnoremap L $
 
 " Toggle PASTE mode by clicking with the scroll-wheel.
-:set pastetoggle=<MiddleMouse>
+:set pastetoggle=<leader>p
 
 " Prevent any use of cursor keys or esc by mapping them to 'no op'
 " {{{
@@ -142,8 +144,11 @@ inoremap <expr> <enter> pumvisible() ? "\<esc>" : "\<enter>"
 iabbrev ssig --<cr>Joseph Adams<cr>whitegolem@gmail.com
 iabbrev @@ whitegolem@gmail.com
 
-" --- Third-party plugin config from here on ---
+" Ensure Goyo is used when writing emails.
+autocmd BufRead,BufNewFile /var/*/neomutt* let g:goyo_width=80
+autocmd BufRead,BufNewFile /var/*/neomutt* :Goyo
 
+" --- Third-party plugin config from here on ---
 let g:lightline = {
       \ 'colorscheme': 'ayu',
       \ 'active': {
@@ -153,20 +158,6 @@ let g:lightline = {
       \ },
       \ }
 
-" Add fzf to the runtime path, so that fzf.vim can find it.
-" TODO: setup proper/helpful bindings for fzf.
-set rtp+=/usr/local/opt/fzf
-
-" Automatically enable Limelight when Goyo is used.
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
-" Ensure Goyo is used when writing emails.
-" TODO: Doesn't quite work. When ViM is launched by neomutt we are presented
-"       with an error message to do with lightline.
-autocmd BufRead,BufNewFile /var/*/neomutt* let g:goyo_width=80
-autocmd BufRead,BufNewFile /var/*/neomutt* :Goyo
-
 " Limelight isn't clever enough to figure out how to darken/gray-out the
 " colorscheme, so it needs some hints.
 let g:limelight_conceal_ctermfg = 'gray'
@@ -174,9 +165,9 @@ let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
 
-set termguicolors
-let ayucolor='mirage'
-colorscheme ayu
+" Automatically enable Limelight when Goyo is used.
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 let NERDTreeIgnore = [ '\.aux$', '\.fdb_latexmk$', '\.fls', '\.synctex\.gz$', '\.toc' ]
 nnoremap <C-n> :NERDTreeToggle<cr>
@@ -185,3 +176,11 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close ViM if the only remaining window left open is NERDTree.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Load all plugins now so that we can have the ALE help tags.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
+

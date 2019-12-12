@@ -13,3 +13,6 @@
 [submodule "vim/pack/all/start/goyo.vim"]
 	path = vim/pack/all/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim.git
+[submodule "vim/pack/all/start/ale"]
+	path = vim/pack/all/start/ale
+	url = https://github.com/dense-analysis/ale.git
