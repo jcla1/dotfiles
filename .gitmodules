@@ -1,0 +1,15 @@
+[submodule "vim/pack/themes/start/ayu-vim"]
+	path = vim/pack/themes/start/ayu-vim
+	url = https://github.com/ayu-theme/ayu-vim.git
+[submodule "vim/pack/all/start/nerdtree"]
+	path = vim/pack/all/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/pack/all/start/limelight.vim"]
+	path = vim/pack/all/start/limelight.vim
+	url = https://github.com/junegunn/limelight.vim.git
+[submodule "vim/pack/all/start/lightline.vim"]
+	path = vim/pack/all/start/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+[submodule "vim/pack/all/start/goyo.vim"]
+	path = vim/pack/all/start/goyo.vim
+	url = https://github.com/junegunn/goyo.vim.git
