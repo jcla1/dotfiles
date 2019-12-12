@@ -1,0 +1,30 @@
+[user]
+    name  = Joseph Adams
+    email = whitegolem@gmail.com
+[credential]
+    helper = osxkeychain
+[alias]
+    co                = checkout
+    rank-contributers = !$ZSH/bin/git-rank-contributers
+    count             = !git shortlog -sn
+    lg                = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset' --abbrev-commit
+[color]
+    diff   = auto
+    status = auto
+    branch = auto
+    ui     = true
+[core]
+    excludesfile = /Users/joseph/.gitignore_global
+[apply]
+    whitespace = nowarn
+[mergetool]
+    keepBackup = false
+[difftool]
+    prompt = false
+[help]
+    autocorrect = 1
+[push]
+    default = simple
+    autocorrect = 1
+[status]
+    short = true

@@ -1,0 +1,187 @@
+let mapleader = ","
+
+set number
+set nowrap textwidth=80
+
+set hlsearch incsearch ignorecase smartcase
+" Quickly get rid of search highlighting again.
+nnoremap <leader>h :noh<cr>
+
+set smarttab expandtab
+set smartindent autoindent
+set softtabstop=2 shiftwidth=2
+
+" Don't show the mode we're in in the statusline, as that's now supposed to be
+" handled by lightline.
+set noshowmode
+
+" Enable mouse support
+set mouse=a
+
+" Setup ViM command completion in the status line.
+set wildmode=longest,list,full
+set wildmenu
+
+" Stop the beeping.
+set visualbell
+
+" Fold sections enclosed in {{{ ... }}}. The folds can be toggled with: za<cr>.
+" Also foldcolumn enables to toggle folds using the mouse.
+set foldmethod=marker
+set foldcolumn=1
+
+set completeopt=menuone,menu,longest
+
+" Deal with how ViM handles swap/undo/backup files.
+" {{{
+" Protect changes between writes. Default values of updatecount (200 keystrokes)
+" and uptime (4 seconds) are fine.
+" see: https://begriffs.com/posts/2019-07-19-history-use-vim.html
+set swapfile
+set directory^=~/.vim/swap//
+
+" protect against crash-during-write
+set writebackup
+" but do not persist backup after successful write
+set nobackup
+" use rename-and-write-new method whenever safe
+set backupcopy=auto
+" patch required to honor double slash at end
+if has("patch-8.1.0251")
+  " consolidate the writebackups -- not a big
+  " deal either way, since they usually get deleted
+  set backupdir^=~/.vim/backup//
+end
+
+" persist the undo tree for each file
+set undofile
+set undodir^=~/.vim/undo//
+" }}}
+
+" The encoding displayed.
+set encoding=utf-8
+" The encoding written to file.
+set fileencoding=utf-8
+
+" When splitting windows open then below/to the right of current window.
+set splitbelow splitright
+
+" If we're in a terminal make sure all colors work nicely.
+if !has('gui_running')
+  set t_Co=256
+endif
+
+" Keep buffers even when they are 'abandoned'. Use fzf's :Buffers to navigate
+" them.
+set hidden
+
+syntax enable
+filetype plugin indent on
+set background=dark
+
+" Remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Color the 81st column magenta, iff there is a char there.
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v.\+', 100)
+
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Enclose current word in double quotes
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
+
+" Toggle PASTE mode by clicking with the scroll-wheel.
+:set pastetoggle=<MiddleMouse>
+
+" Prevent any use of cursor keys or esc by mapping them to 'no op'
+" {{{
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+
+inoremap jk <esc>
+inoremap <esc> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+" }}}
+
+" Shortcut to rapidly toggle `set list`
+set listchars=tab:»\ ,trail:.,eol:¬
+nmap <leader>l :set list!<cr>
+
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59
+
+set fillchars+=stl:\ ,stlnc:\
+" Force ViM to always show status line
+set laststatus=2
+
+" Shortcuts to (de-)activate the spell-checking.
+nnoremap <f5> :set spell! spelllang=en_gb<cr>
+nnoremap <f6> :set spelllang=de_20<cr>
+" Since for the ViM built-in spell-checker there's only an insert-mode popup we
+" need to get there from normal-mode.
+nnoremap <leader>k ea<c-x><c-s>
+" Make navigation of the spell-check pop-up-menu (pum) easier. We're using u/i
+" to navigate up/down (instead of the usual j/k) which is slightly awkward,
+" because jk is used to exit insert mode.
+inoremap <expr> u pumvisible() ? "\<C-n>" : "u"
+inoremap <expr> i pumvisible() ? "\<C-p>" : "i"
+inoremap <expr> <enter> pumvisible() ? "\<esc>" : "\<enter>"
+
+iabbrev ssig --<cr>Joseph Adams<cr>whitegolem@gmail.com
+iabbrev @@ whitegolem@gmail.com
+
+" --- Third-party plugin config from here on ---
+
+let g:lightline = {
+      \ 'colorscheme': 'ayu',
+      \ 'active': {
+      \   'right': [ ['lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'filetype' ] ]
+      \ },
+      \ }
+
+" Add fzf to the runtime path, so that fzf.vim can find it.
+" TODO: setup proper/helpful bindings for fzf.
+set rtp+=/usr/local/opt/fzf
+
+" Automatically enable Limelight when Goyo is used.
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+" Ensure Goyo is used when writing emails.
+" TODO: Doesn't quite work. When ViM is launched by neomutt we are presented
+"       with an error message to do with lightline.
+autocmd BufRead,BufNewFile /var/*/neomutt* let g:goyo_width=80
+autocmd BufRead,BufNewFile /var/*/neomutt* :Goyo
+
+" Limelight isn't clever enough to figure out how to darken/gray-out the
+" colorscheme, so it needs some hints.
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+set termguicolors
+let ayucolor='mirage'
+colorscheme ayu
+
+let NERDTreeIgnore = [ '\.aux$', '\.fdb_latexmk$', '\.fls', '\.synctex\.gz$', '\.toc' ]
+nnoremap <C-n> :NERDTreeToggle<cr>
+" Automatically launch NERDTree if ViM was started without specifying any files.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close ViM if the only remaining window left open is NERDTree.
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
