@@ -1,0 +1,6 @@
+vim/undo/*
+!vim/undo/.gitkeep
+vim/backup/*
+!vim/backup/.gitkeep
+vim/swap/*
+!vim/swap/.gitkeep
