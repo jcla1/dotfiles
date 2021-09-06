@@ -1,1 +1,0 @@
-setlocal formatprg=stylish-haskell

@@ -100,7 +100,7 @@ vnoremap H ^
 vnoremap L $
 
 " Toggle PASTE mode by clicking with the scroll-wheel.
-:set pastetoggle=<leader>p
+set pastetoggle=<leader>p
 
 " Prevent any use of cursor keys or esc by mapping them to 'no op'
 " {{{
@@ -141,8 +141,8 @@ inoremap <expr> u pumvisible() ? "\<C-n>" : "u"
 inoremap <expr> i pumvisible() ? "\<C-p>" : "i"
 inoremap <expr> <enter> pumvisible() ? "\<esc>" : "\<enter>"
 
-iabbrev ssig --<cr>Joseph Adams<cr>whitegolem@gmail.com
-iabbrev @@ whitegolem@gmail.com
+iabbrev ssig --<cr>Joseph Adams<cr>joseph.adams@hhu.de
+iabbrev @@ joseph.adams@hhu.de
 
 " Ensure Goyo is used when writing emails.
 autocmd BufRead,BufNewFile /var/*/neomutt* let g:goyo_width=80
