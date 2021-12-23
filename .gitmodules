@@ -16,3 +16,6 @@
 [submodule "vim/pack/all/start/ale"]
 	path = vim/pack/all/start/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "vim/pack/all/start/vimwiki"]
+	path = vim/pack/all/start/vimwiki
+	url = https://github.com/vimwiki/vimwiki.git

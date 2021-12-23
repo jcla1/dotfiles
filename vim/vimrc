@@ -1,6 +1,6 @@
 let mapleader = ","
 
-set number
+set number nocompatible
 set nowrap textwidth=80
 
 set hlsearch incsearch ignorecase smartcase
@@ -77,9 +77,10 @@ set hidden
 
 syntax enable
 filetype plugin indent on
-set background=dark termguicolors
-let ayucolor='mirage'
-colorscheme ayu
+" set background=dark termguicolors
+" let ayucolor='mirage'
+" colorscheme ayu
+let t_ut=''
 
 " Remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -144,9 +145,10 @@ inoremap <expr> <enter> pumvisible() ? "\<esc>" : "\<enter>"
 iabbrev ssig --<cr>Joseph Adams<cr>joseph.adams@hhu.de
 iabbrev @@ joseph.adams@hhu.de
 
-" Ensure Goyo is used when writing emails.
-autocmd BufRead,BufNewFile /var/*/neomutt* let g:goyo_width=80
-autocmd BufRead,BufNewFile /var/*/neomutt* :Goyo
+" Horrible "bug" where goyo scrolls horizontally when going over the character
+" limit, but only with whitespace. So we're seting the width large enough
+" (textwidth + 2) so that we can cope with a single trailing space.
+let g:goyo_width=82
 
 " --- Third-party plugin config from here on ---
 let g:lightline = {
@@ -171,11 +173,14 @@ autocmd! User GoyoLeave Limelight!
 
 let NERDTreeIgnore = [ '\.aux$', '\.fdb_latexmk$', '\.fls', '\.synctex\.gz$', '\.toc' ]
 nnoremap <C-n> :NERDTreeToggle<cr>
-" Automatically launch NERDTree if ViM was started without specifying any files.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Close ViM if the only remaining window left open is NERDTree.
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+let g:vimwiki_list = [{'path': '~/sciebo/wiki', 'syntax': 'markdown'}]
+command! Diary VimwikiDiaryIndex
+augroup vimwikigroup
+    autocmd!
+    " automatically update links on read diary
+    autocmd BufRead,BufNewFile diary.wiki VimwikiDiaryGenerateLinks
+augroup end
 
 " Load all plugins now so that we can have the ALE help tags.
 " Plugins need to be added to runtimepath before helptags can be generated.

@@ -1,8 +1,6 @@
 [user]
     name  = Joseph Adams
     email = whitegolem@gmail.com
-[credential]
-    helper = osxkeychain
 [alias]
     st    = status
     co    = checkout
@@ -14,7 +12,7 @@
     branch = auto
     ui     = true
 [core]
-    excludesfile = /Users/joseph/.gitignore_global
+    excludesfile = ~/.gitignore_global
 [apply]
     whitespace = nowarn
 [mergetool]
@@ -28,3 +26,7 @@
     autocorrect = 1
 [status]
     short = true
+[credential]
+	helper = cache
+[init]
+	defaultBranch = master
