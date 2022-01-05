@@ -1,6 +1,3 @@
-[submodule "vim/pack/themes/start/ayu-vim"]
-	path = vim/pack/themes/start/ayu-vim
-	url = https://github.com/ayu-theme/ayu-vim.git
 [submodule "vim/pack/all/start/limelight.vim"]
 	path = vim/pack/all/start/limelight.vim
 	url = https://github.com/junegunn/limelight.vim.git
