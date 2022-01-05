@@ -1,4 +1,8 @@
-let mapleader = ","
+" The encoding displayed and encoding written to file.
+set encoding=utf-8 fileencoding=utf-8
+scriptencoding utf-8
+
+let mapleader = ','
 
 set number nocompatible
 set nowrap textwidth=80
@@ -50,7 +54,7 @@ set nobackup
 " use rename-and-write-new method whenever safe
 set backupcopy=auto
 " patch required to honor double slash at end
-if has("patch-8.1.0251")
+if has('patch-8.1.0251')
   " consolidate the writebackups -- not a big
   " deal either way, since they usually get deleted
   set backupdir^=~/.vim/backup//
@@ -61,8 +65,6 @@ set undofile
 set undodir^=~/.vim/undo//
 " }}}
 
-" The encoding displayed and encoding written to file.
-set encoding=utf-8 fileencoding=utf-8
 " UNIX style files don't have a UTF-8 BOM, so remove it if there is one/be
 " explicit that we're not using BOMs.
 set nobomb
@@ -90,8 +92,12 @@ call matchadd('ColorColumn', '\%81v.\+', 100)
 highlight Folded guibg=NONE
 highlight FoldColumn guibg=NONE
 
+" Lint-errors and the like do not introduce an additional SignColumn.
+set signcolumn=number
+
 " Remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+" Now handled by ALE.
+" autocmd BufWritePre * :%s/\s\+$//e
 
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -126,7 +132,7 @@ inoremap <down> <nop>
 set listchars=tab:»\ ,trail:.,eol:¬
 nmap <leader>l :set list!<cr>
 
-highlight NonText guifg=#4a4a59
+:highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
 set fillchars+=stl:\ ,stlnc:\
@@ -150,13 +156,36 @@ iabbrev ssig --<cr>Joseph Adams<cr>joseph.adams@hhu.de
 iabbrev @@ joseph.adams@hhu.de
 
 " --- Third-party plugin config from here on ---
+let g:ale_linters = {
+\  'c':   ['cc'],
+\  'cpp': ['clangd'],
+\  'sh':  ['shellcheck'],
+\  'vim': ['vint'],
+\}
+" Only run those linters defined above, and no more!
+let g:ale_linters_explicit = 1
+
+let g:ale_echo_msg_info_str = 'I'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+let g:ale_fixers = {
+\  'c':   ['clang-format'],
+\  'cpp': ['clangtidy', 'clang-format'],
+\  'sh':  ['shfmt'],
+\  '*':   ['remove_trailing_lines', 'trim_whitespace'],
+\}
+
+let g:ale_fix_on_save = 1
+
 let g:lightline = {
-      \ 'active': {
-      \   'right': [ ['lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'filetype' ] ]
-      \ },
-      \ }
+\  'active': {
+\    'right': [ ['lineinfo' ],
+\               [ 'percent' ],
+\               [ 'filetype' ] ]
+\  },
+\}
 
 " Limelight isn't clever enough to figure out how to darken/gray-out the
 " colorscheme, so it needs some hints.
@@ -169,12 +198,14 @@ let g:limelight_conceal_guifg = '#777777'
 let g:goyo_width=82
 
 " Automatically enable Limelight when Goyo is used.
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-" Weird bug where quitting Goyo causes all the colours to mess up. Sourcing
-" vimrc helps. This issue started when dropping the colorscheme in ViM and
-" relying on styling from the terminal.
-autocmd! User GoyoLeave source $MYVIMRC
+augroup goyogroup
+  autocmd! User GoyoEnter Limelight
+  autocmd! User GoyoLeave Limelight!
+  " Weird bug where quitting Goyo causes all the colours to mess up. Sourcing
+  " vimrc helps. This issue started when dropping the colorscheme in ViM and
+  " relying on styling from the terminal.
+  autocmd! User GoyoLeave source $MYVIMRC
+augroup end
 
 let g:vimwiki_list = [{'path': '~/sciebo/wiki', 'syntax': 'markdown'}]
 command! Diary VimwikiDiaryIndex
@@ -190,4 +221,3 @@ packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 silent! helptags ALL
-
