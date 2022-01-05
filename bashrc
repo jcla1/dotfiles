@@ -6,23 +6,18 @@ export EDITOR=vim
 export HISTTIMEFORMAT="%y-%m-%d %T "
 HISTSIZE= HISTFILESIZE= # Infinite history.
 
-export GOPATH="$HOME/data/gocode"
-export PATH="$GOPATH/bin:$PATH"
-
 # export PATH="/usr/local/bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/data/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+# export PATH="$HOME/data/bin:$PATH"
+# export PATH="$HOME/.local/bin:$PATH"
 
 export PATH="$HOME/.linuxbrew/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+export HOMEBREW_FORCE_BREWED_CURL=1
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-# Enable Vi keybindings instead of the default emacs ones.
-# set -o vi
 
 # Colourise the ls output, need to use different
 # parameters depending on platform (macOS doesn't
@@ -46,7 +41,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 
 # Print each PATH entry on a separate line
-alias path="echo -e ${PATH//:/\\n}"
+alias path="echo $PATH | tr ':' '\n'"
 
 # Reload this file.
 alias r="source ~/.bashrc"

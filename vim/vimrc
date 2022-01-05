@@ -62,6 +62,9 @@ set undodir^=~/.vim/undo//
 set encoding=utf-8
 " The encoding written to file.
 set fileencoding=utf-8
+" UNIX style files don't have a UTF-8 BOM, so remove it if there is one/be
+" explicit that we're not using BOMs.
+set nobomb
 
 " When splitting windows open then below/to the right of current window.
 set splitbelow splitright
@@ -145,7 +148,7 @@ inoremap <expr> <enter> pumvisible() ? "\<esc>" : "\<enter>"
 iabbrev ssig --<cr>Joseph Adams<cr>joseph.adams@hhu.de
 iabbrev @@ joseph.adams@hhu.de
 
-" Horrible "bug" where goyo scrolls horizontally when going over the character
+" Horrible 'bug' where goyo scrolls horizontally when going over the character
 " limit, but only with whitespace. So we're seting the width large enough
 " (textwidth + 2) so that we can cope with a single trailing space.
 let g:goyo_width=82
