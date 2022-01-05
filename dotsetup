@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Dotfiles setup - use after cloning dotfiles repo to .dotfiles
+
+# dotfiles="$HOME/.dotfiles"
+dotfiles=$(dirname $0)
+
+# Files
+for i in vim gitconfig gitignore_global bash_profile bashrc; do
+  ln -s -f "$dotfiles/$i" "$HOME/.$i"
+done

@@ -4,3 +4,10 @@ vim/backup/*
 !vim/backup/.gitkeep
 vim/swap/*
 !vim/swap/.gitkeep
+
+id_rsa*
+authorized_keys
+known_hosts
+
+config/
+

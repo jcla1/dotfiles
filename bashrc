@@ -14,13 +14,12 @@ export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/data/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-# Disable ctrl-s and ctrl-q.
-stty -ixon
-# Disable ctrl-o so that neomutt is usable.
-stty discard undef
 
 # Enable Vi keybindings instead of the default emacs ones.
 # set -o vi
@@ -45,11 +44,6 @@ alias ll="ls -la"
 
 alias ..="cd .."
 alias ...="cd ../.."
-alias ....="cd ../../.."
-
-alias m="neomutt"
-
-alias join-pdfs='"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py"'
 
 # Print each PATH entry on a separate line
 alias path="echo -e ${PATH//:/\\n}"
@@ -57,3 +51,7 @@ alias path="echo -e ${PATH//:/\\n}"
 # Reload this file.
 alias r="source ~/.bashrc"
 
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# END_KITTY_SHELL_INTEGRATION
