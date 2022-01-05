@@ -12,4 +12,5 @@ authorized_keys
 known_hosts
 
 config/
+!config/kitty/*
 
