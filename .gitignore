@@ -5,6 +5,8 @@ vim/backup/*
 vim/swap/*
 !vim/swap/.gitkeep
 
+vim/.netrwhist
+
 id_rsa*
 authorized_keys
 known_hosts
