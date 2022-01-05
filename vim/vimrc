@@ -15,7 +15,6 @@ set softtabstop=2 shiftwidth=2
 " handled by lightline.
 set noshowmode
 
-" Enable mouse support
 set mouse=a
 
 " Setup ViM command completion in the status line.
@@ -71,27 +70,28 @@ set nobomb
 " When splitting windows open then below/to the right of current window.
 set splitbelow splitright
 
-" If we're in a terminal make sure all colors work nicely.
-if !has('gui_running')
-  set t_Co=256
-endif
-
 " Keep buffers even when they are 'abandoned'.
 set hidden
 
 syntax enable
 filetype plugin indent on
 set background=dark termguicolors
-" let ayucolor='mirage'
-" colorscheme ayu
 let t_ut=''
 
-" Remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+" If we're in a terminal make sure all colors work nicely.
+if !has('gui_running')
+  set t_Co=256
+endif
 
 " Color the 81st column magenta, iff there is a char there.
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v.\+', 100)
+
+highlight Folded guibg=NONE
+highlight FoldColumn guibg=NONE
+
+" Remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -149,14 +149,8 @@ inoremap <expr> <enter> pumvisible() ? "\<esc>" : "\<enter>"
 iabbrev ssig --<cr>Joseph Adams<cr>joseph.adams@hhu.de
 iabbrev @@ joseph.adams@hhu.de
 
-" Horrible 'bug' where goyo scrolls horizontally when going over the character
-" limit, but only with whitespace. So we're seting the width large enough
-" (textwidth + 2) so that we can cope with a single trailing space.
-let g:goyo_width=82
-
 " --- Third-party plugin config from here on ---
 let g:lightline = {
-      \ 'colorscheme': 'ayu',
       \ 'active': {
       \   'right': [ ['lineinfo' ],
       \              [ 'percent' ],
@@ -166,17 +160,21 @@ let g:lightline = {
 
 " Limelight isn't clever enough to figure out how to darken/gray-out the
 " colorscheme, so it needs some hints.
-" let g:limelight_conceal_ctermfg = 'gray'
-" let g:limelight_conceal_ctermfg = 240
-" let g:limelight_conceal_guifg = 'DarkGray'
-" let g:limelight_conceal_guifg = '#777777'
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Horrible 'bug' where goyo scrolls horizontally when going over the character
+" limit, but only with whitespace. So we're seting the width large enough
+" (textwidth + 2) so that we can cope with a single trailing space.
+let g:goyo_width=82
 
 " Automatically enable Limelight when Goyo is used.
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-
-let NERDTreeIgnore = [ '\.aux$', '\.fdb_latexmk$', '\.fls', '\.synctex\.gz$', '\.toc' ]
-nnoremap <C-n> :NERDTreeToggle<cr>
+" Weird bug where quitting Goyo causes all the colours to mess up. Sourcing
+" vimrc helps. This issue started when dropping the colorscheme in ViM and
+" relying on styling from the terminal.
+autocmd! User GoyoLeave source $MYVIMRC
 
 let g:vimwiki_list = [{'path': '~/sciebo/wiki', 'syntax': 'markdown'}]
 command! Diary VimwikiDiaryIndex
