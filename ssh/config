@@ -3,7 +3,7 @@ Host github.com
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/github
 
-Host az075.reh.math.uni-duesseldorf.de
+Host az075.math.uni-duesseldorf.de
   User adams
   PreferredAuthentications publickey
   IdentityFile ~/.ssh/hhu

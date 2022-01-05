@@ -7,8 +7,8 @@ vim/swap/*
 
 vim/.netrwhist
 
-.ssh/*
-!.ssh/config
+ssh/*
+!ssh/config
 
 config/
 !config/kitty/*
