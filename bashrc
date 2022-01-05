@@ -10,20 +10,17 @@ HISTSIZE= HISTFILESIZE= # Infinite history.
 # export PATH="$HOME/data/bin:$PATH"
 # export PATH="$HOME/.local/bin:$PATH"
 
-export PATH="$HOME/.linuxbrew/bin:$PATH"
-export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+export PATH="${HOMEBREW_PREFIX}/bin:$PATH"
+export MANPATH="${HOMEBREW_PREFIX}/share/man:$MANPATH"
+export INFOPATH="${HOMEBREW_PREFIX}/share/info:$INFOPATH"
 export HOMEBREW_FORCE_BREWED_CURL=1
 
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
-  then
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
     source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
   else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
-    do
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
       [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
     done
   fi
