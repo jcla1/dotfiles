@@ -25,10 +25,14 @@ set wildmenu
 " Stop the beeping.
 set visualbell
 
+" Tell ViM to use the system clipboard. When yanking something to the default
+" register you're able to Ctrl-v it in another program and vice versa with
+" pasting.
+set clipboard=unnamedplus
+
 " Fold sections enclosed in {{{ ... }}}. The folds can be toggled with: za.
 " Also foldcolumn enables to toggle folds using the mouse.
-set foldmethod=marker
-set foldcolumn=1
+set foldmethod=marker foldcolumn=1
 
 set completeopt=menuone,menu,longest
 
@@ -58,10 +62,8 @@ set undofile
 set undodir^=~/.vim/undo//
 " }}}
 
-" The encoding displayed.
-set encoding=utf-8
-" The encoding written to file.
-set fileencoding=utf-8
+" The encoding displayed and encoding written to file.
+set encoding=utf-8 fileencoding=utf-8
 " UNIX style files don't have a UTF-8 BOM, so remove it if there is one/be
 " explicit that we're not using BOMs.
 set nobomb
@@ -74,13 +76,12 @@ if !has('gui_running')
   set t_Co=256
 endif
 
-" Keep buffers even when they are 'abandoned'. Use fzf's :Buffers to navigate
-" them.
+" Keep buffers even when they are 'abandoned'.
 set hidden
 
 syntax enable
 filetype plugin indent on
-" set background=dark termguicolors
+set background=dark termguicolors
 " let ayucolor='mirage'
 " colorscheme ayu
 let t_ut=''
@@ -97,14 +98,14 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Enclose current word in double quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+" Toggle PASTE mode by clicking with the scroll-wheel.
+set pastetoggle=<leader>p
 
+" Set navigation keys that keep us on the home row.
 nnoremap H ^
 nnoremap L $
 vnoremap H ^
 vnoremap L $
-
-" Toggle PASTE mode by clicking with the scroll-wheel.
-set pastetoggle=<leader>p
 
 " Prevent any use of cursor keys or esc by mapping them to 'no op'
 " {{{
@@ -165,10 +166,10 @@ let g:lightline = {
 
 " Limelight isn't clever enough to figure out how to darken/gray-out the
 " colorscheme, so it needs some hints.
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
+" let g:limelight_conceal_ctermfg = 'gray'
+" let g:limelight_conceal_ctermfg = 240
+" let g:limelight_conceal_guifg = 'DarkGray'
+" let g:limelight_conceal_guifg = '#777777'
 
 " Automatically enable Limelight when Goyo is used.
 autocmd! User GoyoEnter Limelight
