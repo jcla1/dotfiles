@@ -5,25 +5,23 @@ export EDITOR=vim
 export HISTTIMEFORMAT="%y-%m-%d %T "
 HISTSIZE= HISTFILESIZE= # Infinite history.
 
-# export PATH="/usr/local/bin:$PATH"
-# export PATH="/usr/local/sbin:$PATH"
-# export PATH="$HOME/data/bin:$PATH"
-# export PATH="$HOME/.local/bin:$PATH"
+export HOMEBREW_FORCE_BREWED_CURL=1
+if [[ "$(uname)" == "Linux" ]]; then
+  export HOMEBREW_PREFIX="/home/reh/adams/.linuxbrew"
+else
+  export HOMEBREW_PREFIX="/usr/local"
+fi
 
 export PATH="${HOMEBREW_PREFIX}/bin:$PATH"
 export MANPATH="${HOMEBREW_PREFIX}/share/man:$MANPATH"
 export INFOPATH="${HOMEBREW_PREFIX}/share/info:$INFOPATH"
-export HOMEBREW_FORCE_BREWED_CURL=1
 
-if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-    done
-  fi
+if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+  source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+else
+  for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+    [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+  done
 fi
 
 export LC_ALL=en_US.UTF-8
