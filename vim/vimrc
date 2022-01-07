@@ -89,6 +89,12 @@ set t_ut=''
 " Make sure we're using all the colours.
 set t_Co=256
 
+" Set up ViM with the correct escape codes for the undercurl feature. These are
+" taken from the suggestion in the syntax.txt help file (:h highlight-args in
+" ViM 8.2.0929 and later).
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
+
 " Color the 81st column magenta, iff there is a char there.
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v.\+', 100)
@@ -103,8 +109,12 @@ set signcolumn=number
 " Now handled by ALE.
 " autocmd BufWritePre * :%s/\s\+$//e
 
-nnoremap <leader>ev :split $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+" Open the .vimrc file. When in an unnamed buffer (i.e. immediately after
+" starting ViM) open the file in the existing window rather than splitting.
+nnoremap <expr> <leader>ev (bufname("%") ==? "" ? ":edit" : ":split")." $MYVIMRC<cr>"
+" Reload the .vimrc file. When currently editing the .vimrc file in the current
+" buffer save it before reloading.
+nnoremap <expr> <leader>sv (expand("%:p") ==? expand($MYVIMRC)? ":w \|" : ":")."source $MYVIMRC<cr>"
 
 " Enclose current word in double quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
