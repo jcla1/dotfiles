@@ -7,6 +7,11 @@ let mapleader = ','
 set number nocompatible
 set nowrap textwidth=80
 
+" For whatever reason, since upgrading to ViM 8.2, if backspace isn't set it
+" will behave in Vi compatible fashion and prevent you from backspacing over
+" basically anything.
+set backspace=indent,eol,start
+
 set hlsearch incsearch ignorecase smartcase
 " Quickly get rid of search highlighting again.
 nnoremap <leader>h :noh<cr>
@@ -96,18 +101,13 @@ let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
 " Color the 81st column magenta, iff there is a char there.
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v.\+', 100)
+call matchadd('ColorColumn', '\%81v.\+')
 
 highlight Folded guibg=NONE
 highlight FoldColumn guibg=NONE
 
 " Lint-errors and the like do not introduce an additional SignColumn.
 set signcolumn=number
-
-" Remove trailing whitespace
-" Now handled by ALE.
-" autocmd BufWritePre * :%s/\s\+$//e
 
 " Open the .vimrc file. When in an unnamed buffer (i.e. immediately after
 " starting ViM) open the file in the existing window rather than splitting.
@@ -189,7 +189,9 @@ let g:ale_linters_explicit = 1
 let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%] %[code]%'
+
+let g:ale_default_navigation = 'split'
 
 let g:ale_fixers = {
 \  'c':   ['clangtidy', 'clang-format'],
@@ -201,7 +203,7 @@ let g:ale_fix_on_save = 1
 
 let g:lightline = {
 \  'active': {
-\    'right': [[ 'lineinfo' ], [ 'percent' ], [ 'filetype' ]]
+\    'right': [['lineinfo'], ['percent'], ['filetype']]
 \  },
 \}
 
