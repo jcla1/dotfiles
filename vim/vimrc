@@ -80,6 +80,9 @@ set splitbelow splitright
 " Keep buffers even when they are 'abandoned'.
 set hidden
 
+" Allow Vim to remove comment markers when joining lines.
+set formatoptions+=j
+
 syntax enable
 filetype plugin indent on
 " termguicolors tells ViM to use the more feature full termfg/termbg/etc colours
