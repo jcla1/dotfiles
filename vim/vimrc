@@ -116,6 +116,15 @@ nnoremap <expr> <leader>ev (bufname("%") ==? "" ? ":edit" : ":split")." $MYVIMRC
 " buffer save it before reloading.
 nnoremap <expr> <leader>sv (expand("%:p") ==? expand($MYVIMRC)? ":w \|" : ":")."source $MYVIMRC<cr>"
 
+function! s:execSelection() range abort
+  let savedRegister = getreg('')
+  silent normal! `<v`>y
+  @"
+  call setreg('', savedRegister)
+endfunction
+
+vnoremap <leader>e :call <sid>execSelection()<cr>
+
 " Enclose current word in double quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 " Toggle PASTE mode by clicking with the scroll-wheel.
