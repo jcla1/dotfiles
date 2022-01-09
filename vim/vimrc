@@ -7,12 +7,12 @@ let mapleader = ','
 set number nocompatible
 set nowrap textwidth=80
 
-" For whatever reason, since upgrading to ViM 8.2, if backspace isn't set it
+" For whatever reason, since upgrading to Vim 8.2, if backspace isn't set it
 " will behave in Vi compatible fashion and prevent you from backspacing over
 " basically anything.
 set backspace=indent,eol,start
 
-set hlsearch incsearch ignorecase smartcase
+set hlsearch incsearch smartcase
 " Quickly get rid of search highlighting again.
 nnoremap <leader>h :noh<cr>
 
@@ -26,14 +26,14 @@ set noshowmode
 
 set mouse=a
 
-" Setup ViM command completion in the status line.
+" Setup Vim command completion in the status line.
 set wildmode=longest,list,full
 set wildmenu
 
 " Stop the beeping.
 set visualbell t_vb=
 
-" Tell ViM to use the system clipboard. When yanking something to the default
+" Tell Vim to use the system clipboard. When yanking something to the default
 " register you're able to Ctrl-v it in another program and vice versa with
 " pasting.
 " set clipboard=unnamedplus
@@ -44,7 +44,7 @@ set foldmethod=marker foldcolumn=1
 
 set completeopt=menuone,menu,longest
 
-" Deal with how ViM handles swap/undo/backup files.
+" Deal with how Vim handles swap/undo/backup files.
 " {{{
 " Protect changes between writes. Default values of updatecount (200 keystrokes)
 " and uptime (4 seconds) are fine.
@@ -85,21 +85,21 @@ set formatoptions+=j
 
 syntax enable
 filetype plugin indent on
-" termguicolors tells ViM to use the more feature full termfg/termbg/etc colours
+" termguicolors tells Vim to use the more feature full termfg/termbg/etc colours
 " rather than the ctermfg/ctermbg/etc based ones. Allows one to use hex-colours
 " for example.
 set background=dark termguicolors
 
-" Tell ViM to use the background colour when clearing parts of the screen.
+" Tell Vim to use the background colour when clearing parts of the screen.
 " Without this option set to blank you may find that (in tmux) only the
 " background of actual text will have the correct background colour.
-set t_ut=''
+let t_ut = ""
 " Make sure we're using all the colours.
-set t_Co=256
+let t_Co=256
 
-" Set up ViM with the correct escape codes for the undercurl feature. These are
+" Set up Vim with the correct escape codes for the undercurl feature. These are
 " taken from the suggestion in the syntax.txt help file (:h highlight-args in
-" ViM 8.2.0929 and later).
+" Vim 8.2.0929 and later).
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
 
@@ -113,11 +113,11 @@ highlight FoldColumn guibg=NONE
 set signcolumn=number
 
 " Open the .vimrc file. When in an unnamed buffer (i.e. immediately after
-" starting ViM) open the file in the existing window rather than splitting.
+" starting Vim) open the file in the existing window rather than splitting.
 nnoremap <expr> <leader>ev (bufname("%") ==? "" ? ":edit" : ":split")." $MYVIMRC<cr>"
 " Reload the .vimrc file. When currently editing the .vimrc file in the current
 " buffer save it before reloading.
-nnoremap <expr> <leader>sv (expand("%:p") ==? expand($MYVIMRC)? ":w \|" : ":")."source $MYVIMRC<cr>"
+nnoremap <expr> <leader>sv (expand("%:p") ==? expand($MYVIMRC) ? ":w \|" : ":")."source $MYVIMRC<cr>"
 
 function! s:execSelection() range abort
   let savedRegister = getreg('')
@@ -148,7 +148,7 @@ nnoremap <down> <nop>
 
 inoremap jk <esc>
 " Don't remap <esc> in insert mode! Otherwise you'll mess up some terminal
-" escape codes that will, for example, appear when trying to paste into ViM or
+" escape codes that will, for example, appear when trying to paste into Vim or
 " when Alt-Tab'ing while in insert mode.
 " inoremap <esc> <nop>
 inoremap <left> <nop>
@@ -168,13 +168,13 @@ highlight NonText guifg=DarkGrey
 highlight SpecialKey guifg=DarkGrey
 
 set fillchars+=stl:\ ,stlnc:\
-" Force ViM to always show status line
+" Force Vim to always show status line
 set laststatus=2
 
 " Shortcuts to (de-)activate the spell-checking.
 nnoremap <f5> :set spell! spelllang=en_gb<cr>
 nnoremap <f6> :set spelllang=de_20<cr>
-" Since for the ViM built-in spell-checker there's only an insert-mode popup we
+" Since for the Vim built-in spell-checker there's only an insert-mode popup we
 " need to get there from normal-mode.
 nnoremap <leader>k ea<c-x><c-s>
 " Make navigation of the spell-check pop-up-menu (pum) easier. We're using u/i
@@ -233,7 +233,7 @@ augroup goyogroup
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
   " Weird bug where quitting Goyo causes all the colours to mess up. Sourcing
-  " vimrc helps. This issue started when dropping the colorscheme in ViM and
+  " vimrc helps. This issue started when dropping the colorscheme in Vim and
   " relying on styling from the terminal.
   autocmd! User GoyoLeave source $MYVIMRC
 augroup end
