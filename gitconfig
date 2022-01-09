@@ -30,3 +30,5 @@
 	helper = cache
 [init]
 	defaultBranch = master
+[pull]
+	rebase = true
