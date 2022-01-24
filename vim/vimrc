@@ -12,7 +12,7 @@ set nowrap textwidth=80
 " basically anything.
 set backspace=indent,eol,start
 
-set hlsearch incsearch smartcase
+set hlsearch incsearch ignorecase smartcase
 " Quickly get rid of search highlighting again.
 nnoremap <leader>h :noh<cr>
 
@@ -42,7 +42,7 @@ set visualbell t_vb=
 " Also foldcolumn enables to toggle folds using the mouse.
 set foldmethod=marker foldcolumn=1
 
-set completeopt=menuone,menu,longest
+set completeopt=popup,menu,longest
 
 " Deal with how Vim handles swap/undo/backup files.
 " {{{
@@ -193,6 +193,7 @@ let g:ale_linters = {
 \  'c':   ['clangd'],
 \  'cpp': ['clangd'],
 \  'sh':  ['shellcheck'],
+\  'tex': ['texlab'],
 \  'vim': ['vint'],
 \}
 " Only run those linters defined above, and no more!
@@ -202,8 +203,6 @@ let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%] %[code]%'
-
-let g:ale_default_navigation = 'split'
 
 let g:ale_fixers = {
 \  'c':   ['clangtidy', 'clang-format'],
