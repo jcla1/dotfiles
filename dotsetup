@@ -5,7 +5,7 @@
 # dotfiles="$HOME/.dotfiles"
 dotfiles=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
-for i in ssh config vim gitconfig gitignore_global bash_profile bashrc; do
+for i in ssh config vim gitconfig gitignore_global bash_profile bashrc gdbinit; do
   ln -s -f "$dotfiles/$i" "$HOME/.$i"
 done
 

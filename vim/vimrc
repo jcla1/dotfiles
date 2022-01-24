@@ -93,7 +93,7 @@ set background=dark termguicolors
 " Tell Vim to use the background colour when clearing parts of the screen.
 " Without this option set to blank you may find that (in tmux) only the
 " background of actual text will have the correct background colour.
-let t_ut = ""
+let t_ut = ''
 " Make sure we're using all the colours.
 let t_Co=256
 
