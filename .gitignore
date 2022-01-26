@@ -10,5 +10,6 @@ vim/.netrwhist
 ssh/*
 !ssh/config
 
-config/
+config/*
 !config/kitty/*
+!config/sclirc
