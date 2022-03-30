@@ -5,6 +5,8 @@ export EDITOR=vim
 export HISTTIMEFORMAT="%y-%m-%d %T "
 HISTSIZE='' HISTFILESIZE='' # Infinite history.
 
+export PATH="$HOME/.local/kitty.app/bin:$PATH"
+
 export HOMEBREW_FORCE_BREWED_CURL=1
 export HOMEBREW_NO_ENV_HINTS=1
 if [[ "$(uname)" == "Linux" ]]; then
@@ -56,7 +58,6 @@ alias path='echo $PATH | tr ":" "\n"'
 
 # Reload this file.
 alias r='source ~/.bashrc'
-
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
