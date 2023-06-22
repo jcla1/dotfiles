@@ -5,19 +5,19 @@ export EDITOR=vim
 export HISTTIMEFORMAT="%y-%m-%d %T "
 HISTSIZE='' HISTFILESIZE='' # Infinite history.
 
-export PATH="$HOME/.local/kitty.app/bin:$PATH"
-
 export HOMEBREW_FORCE_BREWED_CURL=1
 export HOMEBREW_NO_ENV_HINTS=1
-if [[ "$(uname)" == "Linux" ]]; then
-  export HOMEBREW_PREFIX="/home/reh/adams/.linuxbrew"
-else
-  export HOMEBREW_PREFIX="/usr/local"
-fi
+#if [[ "$(uname)" == "Linux" ]]; then
+#  export HOMEBREW_PREFIX="/home/reh/adams/.linuxbrew"
+#else
+#  export HOMEBREW_PREFIX="/usr/local"
+#fi
 
-export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:$PATH"
-export MANPATH="${HOMEBREW_PREFIX}/share/man:$MANPATH"
-export INFOPATH="${HOMEBREW_PREFIX}/share/info:$INFOPATH"
+#export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:$PATH"
+#export MANPATH="${HOMEBREW_PREFIX}/share/man:$MANPATH"
+#export INFOPATH="${HOMEBREW_PREFIX}/share/info:$INFOPATH"
+
+export PATH="$HOME/.local/bin:$PATH"
 
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
   # shellcheck source=/dev/null
