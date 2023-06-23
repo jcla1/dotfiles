@@ -29,6 +29,11 @@ else
   done
 fi
 
+export PATH="$HOME/.local/texlive/bin/x86_64-linux:$PATH"
+
+export PATH="$(go env GOPATH)/bin:$PATH"
+export GOPRIVATE="gitlab.com/crypto-project1/*"
+
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB.UTF-8
 
@@ -62,3 +67,5 @@ alias r='source ~/.bashrc'
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
