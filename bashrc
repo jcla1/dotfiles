@@ -5,19 +5,15 @@ export EDITOR=vim
 export HISTTIMEFORMAT="%y-%m-%d %T "
 HISTSIZE='' HISTFILESIZE='' # Infinite history.
 
+export PATH="$HOME/.local/bin:$PATH"
+
+#export PATH="$HOME/.local/texlive/bin/x86_64-linux:$PATH"
+#export PATH="$(go env GOPATH)/bin:$PATH"
+
 export HOMEBREW_FORCE_BREWED_CURL=1
 export HOMEBREW_NO_ENV_HINTS=1
-#if [[ "$(uname)" == "Linux" ]]; then
-#  export HOMEBREW_PREFIX="/home/reh/adams/.linuxbrew"
-#else
-#  export HOMEBREW_PREFIX="/usr/local"
-#fi
-
-#export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:$PATH"
-#export MANPATH="${HOMEBREW_PREFIX}/share/man:$MANPATH"
-#export INFOPATH="${HOMEBREW_PREFIX}/share/info:$INFOPATH"
-
-export PATH="$HOME/.local/bin:$PATH"
+# Initialise the linuxbrew command
+eval "$(/home/reh/adams/homebrew/bin/brew shellenv)"
 
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
   # shellcheck source=/dev/null
@@ -28,14 +24,6 @@ else
     [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
   done
 fi
-
-export PATH="$HOME/.local/texlive/bin/x86_64-linux:$PATH"
-
-export PATH="$(go env GOPATH)/bin:$PATH"
-export GOPRIVATE="gitlab.com/crypto-project1/*"
-
-export LC_ALL=en_GB.UTF-8
-export LANG=en_GB.UTF-8
 
 # Colourise the ls output, need to use different
 # parameters depending on platform (macOS doesn't
@@ -64,8 +52,17 @@ alias path='echo $PATH | tr ":" "\n"'
 # Reload this file.
 alias r='source ~/.bashrc'
 
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
-# END_KITTY_SHELL_INTEGRATION
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then
+  source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
+fi
+
+# Using fzf without properly setting up the local results in annyoing error
+# messages. This is a workaround to avoid that.
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
