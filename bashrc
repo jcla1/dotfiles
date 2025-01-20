@@ -9,6 +9,7 @@ HISTSIZE='' HISTFILESIZE=''
 #export PATH="$HOME/.local/texlive/bin/x86_64-linux:$PATH"
 #export PATH="$(go env GOPATH)/bin:$PATH"
 
+export PATH="$HOME/.local/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config/"
 
 export HOMEBREW_FORCE_BREWED_CURL=1

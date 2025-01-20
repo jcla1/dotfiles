@@ -50,7 +50,7 @@ set completeopt=popup,menu,longest
 " and uptime (4 seconds) are fine.
 " see: https://begriffs.com/posts/2019-07-19-history-use-vim.html
 set swapfile
-set directory^=~/.vim/swap//
+set directory^=~/.config/vim/swap//
 
 " protect against crash-during-write
 set writebackup
@@ -62,12 +62,12 @@ set backupcopy=auto
 if has('patch-8.1.0251')
   " consolidate the writebackups -- not a big
   " deal either way, since they usually get deleted
-  set backupdir^=~/.vim/backup//
+  set backupdir^=~/.config/vim/backup//
 end
 
 " persist the undo tree for each file
 set undofile
-set undodir^=~/.vim/undo//
+set undodir^=~/.config/vim/undo//
 " }}}
 
 " UNIX style files don't have a UTF-8 BOM, so remove it if there is one/be
