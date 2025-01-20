@@ -1,15 +1,17 @@
-vim/undo/*
-!vim/undo/.gitkeep
-vim/backup/*
-!vim/backup/.gitkeep
-vim/swap/*
-!vim/swap/.gitkeep
+config/vim/undo/*
+!config/vim/undo/.gitkeep
+config/vim/backup/*
+!config/vim/backup/.gitkeep
+config/vim/swap/*
+!config/vim/swap/.gitkeep
+config/vim/.netrwhist
 
-vim/.netrwhist
+config/*
+!config/vim
+!config/kitty
+!config/git
+!config/gdb
+!config/screenrc
 
 ssh/*
 !ssh/config
-
-config/*
-!config/kitty/*
-!config/sclirc

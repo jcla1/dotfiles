@@ -3,17 +3,18 @@ export EDITOR=vim
 
 # Get timestamps added to bash history
 export HISTTIMEFORMAT="%y-%m-%d %T "
-HISTSIZE='' HISTFILESIZE='' # Infinite history.
-
-export PATH="$HOME/.local/bin:$PATH"
+# Infinite history.
+HISTSIZE='' HISTFILESIZE=''
 
 #export PATH="$HOME/.local/texlive/bin/x86_64-linux:$PATH"
 #export PATH="$(go env GOPATH)/bin:$PATH"
 
+export XDG_CONFIG_HOME="$HOME/.config/"
+
 export HOMEBREW_FORCE_BREWED_CURL=1
 export HOMEBREW_NO_ENV_HINTS=1
 # Initialise the linuxbrew command
-eval "$(/home/reh/adams/homebrew/bin/brew shellenv)"
+eval "$($HOME/homebrew/bin/brew shellenv)"
 
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
   # shellcheck source=/dev/null
@@ -66,3 +67,7 @@ export LC_ALL=en_US.UTF-8
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Setup GNU screen to use custom configuration stored in the ~/.config
+# directory, which it unfortunately doesn't do by default.
+export SCREENRC="$HOME/.config/screenrc"

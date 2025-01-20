@@ -7,12 +7,7 @@
     count = !git shortlog -sn
     lg    = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset' --abbrev-commit
 [color]
-    diff   = auto
-    status = auto
-    branch = auto
-    ui     = true
-[core]
-    excludesfile = ~/.gitignore_global
+    ui     = auto
 [apply]
     whitespace = nowarn
 [mergetool]
@@ -27,11 +22,11 @@
 [status]
     short = true
 [credential]
-	helper = cache
+    helper = cache
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [pull]
-	rebase = true
+    rebase = true
 
 [url "ssh://git@gitlab.com/"]
-	insteadOf = https://gitlab.com/
+    insteadOf = https://gitlab.com/
