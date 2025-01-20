@@ -1,18 +1,18 @@
 [submodule "vim/pack/all/start/limelight.vim"]
-	path = vim/pack/all/start/limelight.vim
+	path = config/vim/pack/all/start/limelight.vim
 	url = https://github.com/junegunn/limelight.vim.git
 [submodule "vim/pack/all/start/lightline.vim"]
-	path = vim/pack/all/start/lightline.vim
+	path = config/vim/pack/all/start/lightline.vim
 	url = https://github.com/itchyny/lightline.vim
 [submodule "vim/pack/all/start/goyo.vim"]
-	path = vim/pack/all/start/goyo.vim
+	path = config/vim/pack/all/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim.git
 [submodule "vim/pack/all/start/vimwiki"]
-	path = vim/pack/all/start/vimwiki
+	path = config/vim/pack/all/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
 [submodule "vim/pack/all/start/ale"]
-	path = vim/pack/all/start/ale
+	path = config/vim/pack/all/start/ale
 	url = https://github.com/dense-analysis/ale.git
 [submodule "vim/pack/all/start/copilot.vim"]
-	path = vim/pack/all/start/copilot.vim
+	path = config/vim/pack/all/start/copilot.vim
 	url = https://github.com/github/copilot.vim
