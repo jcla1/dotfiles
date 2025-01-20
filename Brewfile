@@ -2,6 +2,7 @@
 #   brew bundle install --file=<path to this file>
 brew "fzf"
 brew "jq"
+brew "go"
 brew "entr"
 brew "htop"
 brew "ripgrep"
