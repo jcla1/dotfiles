@@ -190,11 +190,12 @@ set concealcursor= conceallevel=2
 
 " --- Third-party plugin config from here on ---
 let g:ale_linters = {
-\  'c':   ['clangd'],
-\  'cpp': ['clangd'],
-\  'sh':  ['shellcheck'],
-\  'tex': ['texlab'],
-\  'vim': ['vint'],
+\  'c':       ['clangd'],
+\  'cpp':     ['clangd'],
+\  'fortran': ['gcc'],
+\  'sh':      ['shellcheck'],
+\  'go':      ['gopls'],
+\  'vim':     ['vint'],
 \}
 " Only run those linters defined above, and no more!
 let g:ale_linters_explicit = 1
@@ -208,6 +209,7 @@ let g:ale_fixers = {
 \  'c':   ['clangtidy', 'clang-format'],
 \  'cpp': ['clangtidy', 'clang-format'],
 \  'sh':  ['shfmt'],
+\  'go':  ['gofmt', 'goimports', 'gopls'],
 \  '*':   ['remove_trailing_lines', 'trim_whitespace'],
 \}
 let g:ale_fix_on_save = 1
