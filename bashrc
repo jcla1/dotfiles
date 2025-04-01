@@ -1,38 +1,37 @@
 export PS1="\u@\h:\w \n => "
 export EDITOR=vim
+export XDG_CONFIG_HOME="$HOME/.config/"
 
 # Get timestamps added to bash history
 export HISTTIMEFORMAT="%y-%m-%d %T "
 # Infinite history.
 HISTSIZE='' HISTFILESIZE=''
 
-export PATH="$(go env GOPATH)/bin:$PATH"
-
+GO_BIN_PATH="$(go env GOPATH)/bin"
+export PATH="$GO_BIN_PATH:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export XDG_CONFIG_HOME="$HOME/.config/"
+export PATH="$HOME/.local/kitty.app/bin:$PATH"
 
 export HOMEBREW_FORCE_BREWED_CURL=1
 export HOMEBREW_NO_ENV_HINTS=1
 # Initialise the linuxbrew command
-eval "$($HOME/homebrew/bin/brew shellenv)"
+[ -f "$HOME"/homebrew/bin/brew ] && eval "$("$HOME"/homebrew/bin/brew shellenv)"
 
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-  # shellcheck source=/dev/null
-  source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+	# shellcheck source=/dev/null
+	source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 else
-  for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-    # shellcheck source=/dev/null
-    [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-  done
+	for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+		# shellcheck source=/dev/null
+		[[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+	done
 fi
 
 # Colourise the ls output, need to use different
 # parameters depending on platform (macOS doesn't
 # use --color=auto)
 if ls --color >/dev/null 2>&1; then # GNU `ls`
-  colorflag="--color"
-else # macOS `ls`
-  colorflag="-G"
+	colorflag="--color"
 fi
 
 # Always use color output for `ls`
@@ -54,20 +53,20 @@ alias path='echo $PATH | tr ":" "\n"'
 alias r='source ~/.bashrc'
 
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then
-  source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
+	source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
 fi
 
 # Using fzf without properly setting up the local results in annyoing error
 # messages. This is a workaround to avoid that.
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+#export LC_CTYPE=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f "$HOME"/.fzf.bash ] && source "$HOME"/.fzf.bash
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Setup GNU screen to use custom configuration stored in the ~/.config
+# Setup GNU screen to use custom configuration stored in the $HOME/.config
 # directory, which it unfortunately doesn't do by default.
 export SCREENRC="$HOME/.config/screenrc"
